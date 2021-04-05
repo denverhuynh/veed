@@ -1,0 +1,211 @@
+{
+  "data": {
+    "edit": {
+      "videos": {},
+      "audioStreams": {},
+      "mediaSources": {
+        "lUVB7LmExl7YqA_MXtLBd": {
+          "duration": 86.703311,
+          "onlineURL": "https://cdn.veed.io/srcVideo/Udm5zEEmqohwfQ7vLnK~h.m4a",
+          "displayURL": "https://cdn.veed.io/srcVideo/Udm5zEEmqohwfQ7vLnK~h.m4a"
+        },
+        "BpKr9yUEekNCfchLIiLtD": {
+          "displayURL": "https://cdn.veed.io/audio/C7M4VvnOKRR9NuGg2LjZZ.m4a",
+          "onlineURL": "https://cdn.veed.io/audio/C7M4VvnOKRR9NuGg2LjZZ.m4a",
+          "duration": 95.434014
+        },
+        "D13PlfE3oELRXQC-YyjkY": {
+          "displayURL": "https://cdn.veed.io/audio/BeX_rF~PXjha4xve9Ic40.wav",
+          "onlineURL": "https://cdn.veed.io/audio/BeX_rF~PXjha4xve9Ic40.wav",
+          "duration": 22.88
+        },
+        "wKL1xWRpTIxPA7QRqsqt9": {
+          "displayURL": "https://cdn.veed.io/audio/Ir_2mROmza8CdjvzWIySX.wav",
+          "onlineURL": "https://cdn.veed.io/audio/Ir_2mROmza8CdjvzWIySX.wav",
+          "duration": 16.24
+        }
+      },
+      "text": {
+        "Ql4Eob1bM9_-mInO9Xx2u": {
+          "value": "Cantonese Terms ",
+          "font": "Roboto",
+          "size": 0.036,
+          "display": "line_block_round",
+          "color": "#FECB2FFF",
+          "align": "center",
+          "emphasis": "bold",
+          "rotation": 0,
+          "from": -6.938893903907228e-18,
+          "to": 10.9,
+          "textWrap": "wrap",
+          "wrapWidth": 1,
+          "lineHeight": 1,
+          "letterSpacing": 0,
+          "zIndex": 4,
+          "x": 0.5,
+          "y": 0.09325079872204473,
+          "bg": "#000000FF"
+        },
+        "5iFbxb4gJk1Bm5JWu8Hfn": {
+          "value": "@BLMCantonese  ",
+          "font": "Roboto",
+          "size": 0.036,
+          "display": "line_block_round",
+          "color": "#FECB2FFF",
+          "align": "center",
+          "emphasis": "bold",
+          "rotation": 0,
+          "from": 0,
+          "to": 10.9,
+          "textWrap": "wrap",
+          "wrapWidth": 1,
+          "lineHeight": 1,
+          "letterSpacing": 0,
+          "zIndex": 0,
+          "bg": "#000000FF",
+          "x": 0.5,
+          "y": 0.9339218659734257
+        },
+        "M3qDfzRbem3PgTMQvAbvx": {
+          "value": "[INSERT TERM]",
+          "font": "Roboto",
+          "size": 0.06,
+          "display": "normal",
+          "color": "#000000",
+          "align": "center",
+          "emphasis": "bold",
+          "rotation": 0,
+          "from": 0,
+          "to": 3.469522574054695,
+          "textWrap": "wrap",
+          "wrapWidth": 0.9333333333333333,
+          "lineHeight": 1,
+          "letterSpacing": 0,
+          "zIndex": 2,
+          "bg": "#ffffff",
+          "x": 0.5,
+          "y": 0.2791666666666667
+        },
+        "Jtb0QTZVwPCVy4nm6iD9C": {
+          "value": "Example:",
+          "font": "Roboto",
+          "size": 0.048,
+          "display": "normal",
+          "color": "#000000",
+          "align": "center",
+          "emphasis": "normal",
+          "rotation": 0,
+          "from": 3.4,
+          "to": 8.7,
+          "textWrap": "wrap",
+          "wrapWidth": 0.8300455235204856,
+          "lineHeight": 1,
+          "letterSpacing": 0,
+          "zIndex": 1,
+          "bg": "#ffffff",
+          "x": 0.5,
+          "y": 0.17233181588265042
+        },
+        "KcDeiYa50uAmAMuzJOZy_": {
+          "value": "[INSERT TERM]",
+          "font": "Roboto",
+          "size": 0.06,
+          "display": "normal",
+          "color": "#000000",
+          "align": "center",
+          "emphasis": "bold",
+          "rotation": 0,
+          "from": 8.7,
+          "to": 10.914271,
+          "textWrap": "wrap",
+          "wrapWidth": 0.6129104615248118,
+          "lineHeight": 1,
+          "letterSpacing": 0,
+          "zIndex": 3,
+          "x": 0.5010224948875257,
+          "y": 0.2796523517382413,
+          "bg": "#ffffff"
+        }
+      },
+      "stickers": {},
+      "progressBars": {},
+      "audioVizs": {},
+      "subtitles": {
+        "activeLanguage": "default",
+        "isGeneratingSubtitlesFromVideo": false,
+        "font": "Roboto",
+        "size": 0.048,
+        "display": "normal",
+        "color": "#000000FF",
+        "bg": "#000000B3",
+        "emphasis": "normal",
+        "align": "center",
+        "textWrap": "wrap",
+        "wrapWidth": 0.920863309352518,
+        "lineHeight": 1.5,
+        "letterSpacing": 0,
+        "zIndex": 100,
+        "tracks": {
+          "U5xSXUZbZIaboO4KiCsDA": {
+            "language": "default",
+            "sourceStream": "BpKr9yUEekNCfchLIiLtD",
+            "items": {
+              "WAmQK6CZH7Hkqo3otqhiF": {
+                "value": "[INSERT CHINESE CHARACTERS]\n[INSERT Romanization]",
+                "from": 0,
+                "to": 3.4627659574468073
+              },
+              "hNSoMvZMqlpwOBEXgamiK": {
+                "value": "[INSERT ENGLISH SENTENCE]\n⎼⎼⎼⎼⎼  \n[INSERT Sentence Characters]\n[INSERT Sentence Romanization]",
+                "from": 3.4627659574468073,
+                "to": 8.754638653191488
+              },
+              "ntBzVEI3WgmiiX9leRpdM": {
+                "value": "[INSERT CHINESE CHARACTERS]\n[INSERT Romanization]",
+                "from": 8.754638653191488,
+                "to": 10.914271
+              }
+            },
+            "name": "default"
+          }
+        },
+        "x": 0.5,
+        "y": 0.5481560822795016
+      },
+      "focusedElement": null,
+      "penLayers": {},
+      "lutpngs": {},
+      "aspect": {
+        "width": 1,
+        "height": 1
+      },
+      "backgroundColor": "#FECB2FFF",
+      "duration": null,
+      "exportSettings": {
+        "mode": "bitrate",
+        "crf": 19,
+        "bitrate": 6291456,
+        "preset": "superfast",
+        "resolutionScale": 1024,
+        "forceScale": false,
+        "fpsLimit": 30,
+        "name": "hootsuite",
+        "burnSubtitles": true
+      },
+      "action": {
+        "type": "[edit] remove media source",
+        "uuid": "8XrnTePqSmybCzuwH5n_Y"
+      },
+      "isProject": true,
+      "showAudioTemplates": false,
+      "version": 31,
+      "showShortcutsHelper": false,
+      "lut": {
+        "url": "",
+        "intensity": 1
+      }
+    }
+  },
+  "name": "Sample Project - IG",
+  "thumbnail_url": "https://cdn.veed.io/projectThumbnails/UKodz08~sj79eN7m6t76k.jpg"
+}
