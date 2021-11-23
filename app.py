@@ -51,7 +51,7 @@ def veed_templating():
     project_id = re.search("[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}", request.form["text"])
     if project_id is None:
         return "Invalid project provided. Please use the project's link."
-    endpoint = "https://api.veed.io/projects/" + project_id
+    endpoint = "https://api.veed.io/projects/" + project_id.group()
     headers = {
         "Authorization": os.environ['token'],
         "Content-Type": "application/json"
@@ -157,7 +157,7 @@ def veed_copy():
     project_id = re.search("[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}", request.form["text"])
     if project_id is None:
         return "Invalid project provided. Please use the project's link."
-    endpoint = "https://api.veed.io/projects/" + project_id
+    endpoint = "https://api.veed.io/projects/" + project_id.group()
     headers = {
         "Authorization": os.environ['token'],
         "Content-Type": "application/json"
