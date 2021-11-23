@@ -1,6 +1,6 @@
 import requests
 import json
-endpoint = "https://api.veed.io/projects/5efb2f51-c7d7-4130-9817-f0a307a3347a"
+endpoint = "https://api.veed.io/projects/cb23c1c4-57b8-4746-bdf6-2deb9de943bf"
 headers = {
     "Authorization": "[INSERT KEY]",
     "Content-Type": "application/json"
@@ -26,13 +26,13 @@ last_subtitle_key = ""
 for k, v in subtitles["items"].items():
     if v["from"] == 0:
         intro["end"] = v["to"]
-        intro_value = v["value"]
+        intro_value = v["words"]
     if v["to"] > last_subtitle_end:
         closing["start"] = v["from"]
         last_subtitle_end = v["to"]
         last_subtitle_key = k
 
-subtitles["items"][last_subtitle_key]["value"] = intro_value
+subtitles["items"][last_subtitle_key]["words"] = intro_value
 subtitles["items"][last_subtitle_key]["to"] = audio_end
 
 text_properties = {
@@ -55,6 +55,14 @@ text_properties = {
     "y": 0.09325079872204473,
     "bg": "#000000FF"
 }
+
+video_term = ""
+video_term_end = 1000000000
+for k, v in project_json["data"]["edit"]["text"].items():
+    if v["to"] < video_term_end:
+        video_term_end = v["to"]
+        video_term = v["value"]
+
 project_json["data"]["edit"]["text"] = {}
 project_json["data"]["edit"]["text"]["cantoneseTerms"] = text_properties.copy()
 
@@ -75,7 +83,7 @@ text_properties["bg"] = "#ffffff"
 text_properties["y"] = 0.17233181588265042
 project_json["data"]["edit"]["text"]["example"] = text_properties.copy()
 
-text_properties["value"] = "[INSERT TERM]"
+text_properties["value"] = video_term
 text_properties["size"] = 0.06
 text_properties["display"] = "normal"
 text_properties["color"] = "#000000"
