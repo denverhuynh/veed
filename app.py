@@ -6,22 +6,29 @@ import time
 import hashlib
 import requests
 import json
+import re
 
 app = Flask(__name__)
 
 @app.route('/', methods=['POST'])
 def index():
     if valid_request():
-        veed_templating()
-        
-    return "Processed " + request.form["text"] + " - Refresh the page to see changes."
+        response = veed_templating()
+        if response is None:
+            return "Processed " + request.form["text"] + " - Refresh the page to see changes."
+        else:
+            return response
+    return "Permissions validation failed"
 
 @app.route('/copy', methods=['POST'])
 def veed_copy():
     if valid_request():
-        veed_copy()
-        
-    return "Copied:" + request.form["text"] + " View: https://www.veed.io/workspaces/772f58ea-eaf2-4036-897a-922298b1b92f/projects"
+        response = veed_copy()
+        if response is None:
+            return "Copied:" + request.form["text"] + " View: https://www.veed.io/workspaces/772f58ea-eaf2-4036-897a-922298b1b92f/projects"
+        else:
+            return response
+    return "Permissions validation failed"
 
 def valid_request():
     timestamp = request.headers['X-Slack-Request-Timestamp']
@@ -41,7 +48,10 @@ def valid_request():
     return False
 
 def veed_templating():
-    endpoint = "https://api.veed.io/projects/" + request.form["text"].rsplit("/", 1).pop()
+    project_id = re.search("[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}", request.form["text"])
+    if project_id is None:
+        return "Invalid project provided. Please use the project's link."
+    endpoint = "https://api.veed.io/projects/" + project_id
     headers = {
         "Authorization": os.environ['token'],
         "Content-Type": "application/json"
@@ -140,10 +150,14 @@ def veed_templating():
 
     response = requests.put(endpoint, data=json.dumps(project_json), headers=headers);
     project_json = response.json()
+    return None
 
 
 def veed_copy():
-    endpoint = "https://api.veed.io/projects/" + request.form["text"].rsplit("/", 1).pop()
+    project_id = re.search("[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}", request.form["text"])
+    if project_id is None:
+        return "Invalid project provided. Please use the project's link."
+    endpoint = "https://api.veed.io/projects/" + project_id
     headers = {
         "Authorization": os.environ['token'],
         "Content-Type": "application/json"
@@ -192,3 +206,4 @@ def veed_copy():
             json_copy["data"]["edit"]["text"][k]["size"] = 0.096
     endpoint = "https://api.veed.io/projects/" + id
     project_json = requests.put(endpoint, data=json.dumps(json_copy), headers=headers).json()
+    return None
