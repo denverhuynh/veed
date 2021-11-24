@@ -35,7 +35,7 @@ def veed_copy():
 def veed_generate():
     if valid_request():
         response = generate_from_sheet()
-        return "New video start: " + response
+        return "New video started: " + response
     return "Permissions validation failed"
 
 def valid_request():
