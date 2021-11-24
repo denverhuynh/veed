@@ -26,7 +26,7 @@ def veed_copy():
     if valid_request():
         response = veed_copy()
         if response is None:
-            return "Copied:" + request.form["text"] + " View: https://www.veed.io/workspaces/772f58ea-eaf2-4036-897a-922298b1b92f/projects"
+            return "Copied: " + request.form["text"] + " View: https://www.veed.io/workspaces/772f58ea-eaf2-4036-897a-922298b1b92f/projects"
         else:
             return response
     return "Permissions validation failed"
@@ -227,7 +227,7 @@ def generate_from_sheet():
     template_json = requests.get(endpoint, headers=headers).json()
     for k, v in template_json["data"]["edit"]["text"].items():
         if v["value"] == "[INSERT TERM]":
-            template_json["data"]["edit"]["text"][k]["value"] = sheet_data["English"]
+            template_json["data"]["edit"]["text"][k]["value"] = sheet_data["English"].capitalize()
 
     example_subtitle = sheet_data["Example (English)"] + "\n⎼⎼⎼⎼⎼\n" + sheet_data["Example (Cantonese)"] + "\n" + sheet_data["Cantonese romanization"]
     
