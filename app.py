@@ -7,6 +7,7 @@ import hashlib
 import requests
 import json
 import re
+import pandas
 
 app = Flask(__name__)
 
@@ -28,6 +29,13 @@ def veed_copy():
             return "Copied:" + request.form["text"] + " View: https://www.veed.io/workspaces/772f58ea-eaf2-4036-897a-922298b1b92f/projects"
         else:
             return response
+    return "Permissions validation failed"
+
+@app.route('/generate', methods=['POST'])
+def veed_generate():
+    if valid_request():
+        response = generate_from_sheet()
+        return "New video start: " + response
     return "Permissions validation failed"
 
 def valid_request():
@@ -166,10 +174,10 @@ def veed_copy():
     project_json = requests.get(endpoint, headers=headers).json()
 
     endpoint = "https://api.veed.io/projects/workspaces/772f58ea-eaf2-4036-897a-922298b1b92f"
-    new_json = requests.post(endpoint, headers=headers).json()
-    id = new_json.pop("id")
-
-    json_copy = {}
+    json_copy = {
+        "duplicatedFrom": project_id.group(),
+        "folder": "/"
+    }
     json_copy["name"] = project_json["name"].split("-")[0] + "- Youtube"
     json_copy["data"] = project_json["data"]
     json_copy["data"]["edit"]["aspect"]["width"] = 16
@@ -182,12 +190,7 @@ def veed_copy():
         elif v["value"] == "Example:":
             json_copy["data"]["edit"]["text"][k]["size"] = 0.024
             json_copy["data"]["edit"]["text"][k]["emphasis"] = "bold"
-    endpoint = "https://api.veed.io/projects/" + id
-    project_json = requests.put(endpoint, data=json.dumps(json_copy), headers=headers).json()
-
-    endpoint = "https://api.veed.io/projects/workspaces/772f58ea-eaf2-4036-897a-922298b1b92f"
-    new_json = requests.post(endpoint, headers=headers).json()
-    id = new_json.pop("id")
+    project_json = requests.post(endpoint, data=json.dumps(json_copy), headers=headers).json()
 
     json_copy["name"] = project_json["name"].split("-")[0] + "- TikTok"
     json_copy["data"]["edit"]["aspect"]["width"] = 9
@@ -204,6 +207,58 @@ def veed_copy():
             json_copy["data"]["edit"]["text"][k]["size"] = 0.048
         else:
             json_copy["data"]["edit"]["text"][k]["size"] = 0.096
-    endpoint = "https://api.veed.io/projects/" + id
-    project_json = requests.put(endpoint, data=json.dumps(json_copy), headers=headers).json()
+    project_json = requests.post(endpoint, data=json.dumps(json_copy), headers=headers).json()
+
     return None
+
+
+def generate_from_sheet():
+    link = os.environ['googlesheet']
+    df = pandas.read_csv(link, header=1)
+    sheet_data = df.iloc[int(request.form["text"])-3][['English', 'Cantonese', 'Example (English)', 'Example (Cantonese)', 'Cantonese romanization']]
+    
+    token = os.environ['token']
+    template_id = "5712ea1d-9815-4560-b015-4dbf3ba6eda1"
+    endpoint = "https://api.veed.io/projects/" + template_id
+    headers = {
+        "Authorization": token,
+        "Content-Type": "application/json"
+    }
+    template_json = requests.get(endpoint, headers=headers).json()
+    for k, v in template_json["data"]["edit"]["text"].items():
+        if v["value"] == "[INSERT TERM]":
+            template_json["data"]["edit"]["text"][k]["value"] = sheet_data["English"]
+
+    example_subtitle = sheet_data["Example (English)"] + "\n⎼⎼⎼⎼⎼\n" + sheet_data["Example (Cantonese)"] + "\n" + sheet_data["Cantonese romanization"]
+    
+    new_subtitles = [sheet_data["Cantonese"], example_subtitle, sheet_data["Cantonese"]]
+    for k, v in template_json["data"]["edit"]["subtitles"]["tracks"].items():
+        if isinstance(v, dict):
+            subtitles = v
+            subtitle_key = k
+    for k,v in subtitles["items"].items():
+        if len(new_subtitles) > 0:
+            new_value = new_subtitles.pop(0)
+            subtitles["items"][k]["words"] =  [
+                {
+                    "value": new_value,
+                    "from": None,
+                    "to": None,
+                    "confidence": None
+                }
+            ]
+    template_json["data"]["edit"]["subtitles"]["tracks"][subtitle_key] = subtitles
+
+    new_project = {
+        "duplicatedFrom": template_id,
+        "folder": "/",
+        "name": sheet_data["English"] + " - IG"
+    }
+    new_project["data"] = template_json["data"]
+    endpoint = "https://api.veed.io/projects/workspaces/772f58ea-eaf2-4036-897a-922298b1b92f"
+    new_json = requests.post(endpoint, data=json.dumps(new_project), headers=headers).json()
+    return "https://www.veed.io/edit/" + new_json["id"]
+
+
+    
+    
