@@ -252,7 +252,7 @@ def generate_from_sheet():
     new_project = {
         "duplicatedFrom": template_id,
         "folder": "/",
-        "name": sheet_data["English"] + " - IG"
+        "name": sheet_data["English"].capitalize() + " - IG"
     }
     new_project["data"] = template_json["data"]
     endpoint = "https://api.veed.io/projects/workspaces/772f58ea-eaf2-4036-897a-922298b1b92f"
