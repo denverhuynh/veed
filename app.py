@@ -62,7 +62,8 @@ def veed_templating():
     endpoint = "https://api.veed.io/projects/" + project_id.group()
     headers = {
         "Authorization": os.environ['token'],
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "User-Agent": "Foo bar"
     }
 
     project_json = requests.get(endpoint, headers=headers).json()
@@ -168,7 +169,8 @@ def veed_copy():
     endpoint = "https://api.veed.io/projects/" + project_id.group()
     headers = {
         "Authorization": os.environ['token'],
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "User-Agent": "Foo bar"
     }
 
     project_json = requests.get(endpoint, headers=headers).json()
@@ -222,7 +224,8 @@ def generate_from_sheet():
     endpoint = "https://api.veed.io/projects/" + template_id
     headers = {
         "Authorization": token,
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "User-Agent": "Foo bar"
     }
     template_json = requests.get(endpoint, headers=headers).json()
     for k, v in template_json["data"]["edit"]["text"].items():
